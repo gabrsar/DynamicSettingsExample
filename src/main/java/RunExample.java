@@ -1,8 +1,8 @@
-import static br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.Setting.setting;
+import static br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.Setting.define;
 
 import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.DynamicSettings;
 import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.Setting;
-import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.providers.dynamodb.DynamodbProvider;
+import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.providers.dynamodb.DynamoDBProvider;
 import java.util.Date;
 
 public class RunExample {
@@ -15,8 +15,8 @@ public class RunExample {
         public static class Home {
 
             // This is how you define a setting.
-            public static final Setting<String> address = setting("Home", "address", "This is my house");
-            public static final Setting<Float> totalArea = setting("Home", "totalArea", 42.3F);
+            public static final Setting<String> address = define("address", "This is my house");
+            public static final Setting<Float> totalArea = define("totalArea", 42.3F);
         }
     }
 
@@ -35,8 +35,8 @@ public class RunExample {
 
         // Then simply run this project. Settings will be updated every 5 seconds
 
-        DynamodbProvider dynamodbProvider = new DynamodbProvider("MySettings");
-        DynamicSettings ds = new DynamicSettings(dynamodbProvider, Settings.class);
+        DynamoDBProvider dynamodbProvider = new DynamoDBProvider("MySettings");
+        DynamicSettings ds = new DynamicSettings(dynamodbProvider, 2, Settings.class);
 
         ds.start();
 
