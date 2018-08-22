@@ -36,7 +36,7 @@ public class RunExample {
         // Then simply run this project. Settings will be updated every 5 seconds
 
         DynamoDBProvider dynamodbProvider = new DynamoDBProvider("MySettings");
-        DynamicSettings ds = new DynamicSettings(dynamodbProvider, 2, Settings.class);
+        DynamicSettings ds = new DynamicSettings(dynamodbProvider, 5, Settings.class);
 
         ds.start();
 
