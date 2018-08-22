@@ -1,4 +1,4 @@
-# DynamicSettings - Example [WIP]
+# DynamicSettings - Example
 
 This is an example usage application for [DynamicSettings](https://github.com/gabrsar/DynamicSettings)
 
