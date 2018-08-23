@@ -1,9 +1,10 @@
-import static br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.Setting.define;
 
 import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.DynamicSettings;
 import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.Setting;
 import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.providers.dynamodb.DynamoDBProvider;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class RunExample {
 
@@ -15,8 +16,9 @@ public class RunExample {
         public static class Home {
 
             // This is how you define a setting.
-            public static final Setting<String> address = define("address", "This is my house");
-            public static final Setting<Float> totalArea = define("totalArea", 42.3F);
+            public static final Setting<String> address = Setting.define("address", "This is my house");
+            public static final Setting<Float> totalArea = Setting.define("totalArea", 42.3F);
+            public static final Setting<List<String>> family = Setting.define("family", Arrays.asList("Me", "Dog", "Cat"), List.class, String.class);
         }
     }
 
@@ -47,6 +49,7 @@ public class RunExample {
             System.out.println(new Date());
             System.out.println(Settings.Home.address.getValue());
             System.out.println(Settings.Home.totalArea.getValue());
+            System.out.println(Settings.Home.family.getValue());
 
             Thread.sleep(1000);
         }

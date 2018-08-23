@@ -6,14 +6,29 @@
 
   <groupId>br.com.gabrielsaraiva.dynamicsettings</groupId>
   <artifactId>dynamic-settings-example</artifactId>
-  <version>1.0</version>
+  <version>v1.0</version>
 
   <dependencies>
     <dependency>
       <groupId>br.com.gabrielsaraiva.dynamicsettings</groupId>
       <artifactId>dynamic-settings</artifactId>
-      <version>0.1</version>
+      <version>0.1.1</version>
     </dependency>
+
+    <dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>1.7.25</version>
+
+  </dependency>
+
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>jcenter</id>
+      <url>https://jcenter.bintray.com/</url>
+    </repository>
+  </repositories>
 
 </project>
