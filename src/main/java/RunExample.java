@@ -1,28 +1,13 @@
-
 import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.DynamicSettings;
-import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.Setting;
+import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.SettingsReader;
 import br.com.gabrielsaraiva.dynamicsettings.dynamicsettings.providers.dynamodb.DynamoDBProvider;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 public class RunExample {
 
-    // This is how you define your settings from now. I suggesting using a new file for this Settings class.
-    // this one will be here for the sake of simplicity of this example.
-    public static class Settings {
-
-        // It's will be called a Module, with a lot of settings inside. Modules cannot be nested for now.
-        public static class Home {
-
-            // This is how you define a setting.
-            public static final Setting<String> address = Setting.define("address", "This is my house");
-            public static final Setting<Float> totalArea = Setting.define("totalArea", 42.3F);
-            public static final Setting<List<String>> family = Setting.define("family", Arrays.asList("Me", "Dog", "Cat"), List.class, String.class);
-        }
-    }
-
     public static void main(String[] args) throws InterruptedException {
+
+        // First of all check this class: Settings.java in same folder.
 
         // Create your Amazon credentials file with your credentials. (~/.aws/credentials)
         // https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
@@ -33,7 +18,6 @@ public class RunExample {
         // Then add an Item on this table, with module value equal "Home".
         // Add another String (S) field with the name "address", choose a value for it.
 
-        // Notice that the setting called totalArea, is not in your table, but it will use the default value :)
 
         // Then simply run this project. Settings will be updated every 5 seconds
 
@@ -42,14 +26,18 @@ public class RunExample {
 
         ds.start();
 
+        // Instead of instantiating this every time, receive it through injection or as constructor parameter.
+        // This will make your application testable.
+        SettingsReader settingsReader = new SettingsReader();
+
         // This will keep it running for two minutes, so you have time to change things in table and
         // see how it reflects here after a while
         for (int i = 0; i < 120; i++) {
 
             System.out.println(new Date());
-            System.out.println(Settings.Home.address.getValue());
-            System.out.println(Settings.Home.totalArea.getValue());
-            System.out.println(Settings.Home.family.getValue());
+            System.out.println(settingsReader.get(Settings.Home.address));
+            System.out.println(settingsReader.get(Settings.Home.totalArea));
+            System.out.println(settingsReader.get(Settings.Home.family));
 
             Thread.sleep(1000);
         }
